@@ -36,7 +36,7 @@ export class StudentController {
     }
     const keysToRemove = ['__EMPTY', '__EMPTY_1', '__EMPTY_3'];
     
-    for (let i = 6; i <= 11; i++) {
+    for (let i = 6; i <= 20; i++) {
       const copiedItem = { ...data[i] };
       const info = await this.studentService.removeKeys(copiedItem, keysToRemove);
       obj.name = data[i].__EMPTY
