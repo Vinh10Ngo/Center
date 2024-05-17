@@ -1,4 +1,5 @@
-import { IsOptional, IsString, IsNumber, IsBoolean } from 'class-validator';
+import { IsOptional, IsString, IsNumber, IsBoolean,IsArray } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class UpdateCenterDto {
 
@@ -7,18 +8,39 @@ export class UpdateCenterDto {
   readonly name?: string;
 
   @IsOptional()
-  @IsString()
-  readonly location?: string;
+  @IsNumber()
+  readonly fee?: number;
 
   @IsOptional()
   @IsString()
-  readonly contact?: string;
+  readonly code?: string;
 
   @IsOptional()
   @IsString()
-  readonly email?: string;
+  readonly instructor?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  readonly isDiscount?: boolean;
+
+  @IsOptional()
+  @IsNumber()
+  readonly discountPercent?: number;
 
   @IsOptional()
   @IsString()
-  readonly phone?: string;
+  readonly description?: string;
+
+  @IsOptional()
+  readonly studentId?: Types.ObjectId;
+
+  @IsOptional()
+  readonly centerId?: Types.ObjectId;
+
+  @IsOptional()
+  @IsArray()
+  readonly studentArray?: Types.ObjectId[];
+
+  @IsOptional()
+  readonly schoolId?: Types.ObjectId;
 }

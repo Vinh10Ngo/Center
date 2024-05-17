@@ -7,8 +7,8 @@ import { Revenue, RevenueDocument } from './schemas/revenue.schema';
 export class RevenueService {
   constructor(private readonly revenueRepository: RevenueRepository) {}
 
-  async findAll(): Promise<RevenueDocument[]> {
-    return this.revenueRepository.findAll();
+  async findAll(query): Promise<RevenueDocument[]> {
+    return this.revenueRepository.findAll(query);
   }
 
   async findById(revenueId: string): Promise<RevenueDocument | null> {

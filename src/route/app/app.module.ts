@@ -9,9 +9,10 @@ import { RevenueModule } from '../v1/revenue/revenue.module';
 import { ClassInCourseModule } from '../v1/classInCourse/classInCourse.module';
 import { CenterModule } from '../v1/center/center.module';
 import { SchoolModule } from '../v1/school/school.module';
+import { UploadModule } from '../core/upload/upload.module';
 
 @Module({
-  imports: [StudentModule, ParentModule, CourseModule, ExpenditureModule, RevenueModule,ClassInCourseModule, CenterModule, SchoolModule],
+  imports: [UploadModule, StudentModule, ParentModule, CourseModule, ExpenditureModule, RevenueModule,ClassInCourseModule, CenterModule, SchoolModule],
     controllers: [AppController],
   providers: [AppService],
 })

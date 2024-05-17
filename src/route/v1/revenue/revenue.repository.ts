@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Revenue, RevenueDocument } from './schemas/revenue.schema';
-
+import { ParamsService } from 'src/helpers/params';
 @Injectable()
 export class RevenueRepository {
-  constructor(@InjectModel(Revenue.name) private revenueModel: Model<RevenueDocument>) {}
+  constructor(@InjectModel(Revenue.name) private revenueModel: Model<RevenueDocument>, private readonly paramsService: ParamsService) {}
 
 
   async create(revenue: Revenue): Promise<RevenueDocument> {
@@ -21,7 +21,8 @@ export class RevenueRepository {
     return this.revenueModel.findByIdAndDelete(revenueId).exec();
   }
 
-  async findAll(): Promise<RevenueDocument[]> {
+  async findAll(query: any): Promise<RevenueDocument[]> {
+    const obj = await this.paramsService.listItems(query)
     return this.revenueModel.find().populate(['studentId', 'classId']).exec();
   }
 

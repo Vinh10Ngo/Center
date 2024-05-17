@@ -22,7 +22,7 @@ export class CenterRepository {
   }
 
   async findAll(): Promise<CenterDocument[]> {
-    return this.centerModel.find().exec();
+    return this.centerModel.find().populate(['studentId', 'schoolId', 'centerId']).exec();
   }
 
   async findById(centerId: string): Promise<CenterDocument | null> {

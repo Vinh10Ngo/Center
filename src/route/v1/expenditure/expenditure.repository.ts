@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Expenditure, ExpenditureDocument } from './schemas/expenditure.schema';
+import { ParamsService } from 'src/helpers/params';
 
 @Injectable()
 export class ExpenditureRepository {
-  constructor(@InjectModel(Expenditure.name) private expenditureModel: Model<ExpenditureDocument>) {}
+  constructor(@InjectModel(Expenditure.name) private expenditureModel: Model<ExpenditureDocument>, private readonly paramsService: ParamsService) {}
 
 
   async create(expenditure: Expenditure): Promise<ExpenditureDocument> {
@@ -21,8 +22,9 @@ export class ExpenditureRepository {
     return this.expenditureModel.findByIdAndDelete(expenditureId).exec();
   }
 
-  async findAll(): Promise<ExpenditureDocument[]> {
-    return this.expenditureModel.find().exec();
+  async findAll(params): Promise<ExpenditureDocument[]> {
+    const obj = await this.paramsService.listItems(params)
+    return this.expenditureModel.find(obj.find).select(obj.select).sort(obj.sort).exec();
   }
 
   async findById(expenditureId: string): Promise<ExpenditureDocument | null> {

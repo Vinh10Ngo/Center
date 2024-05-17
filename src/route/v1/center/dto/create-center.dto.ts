@@ -1,23 +1,46 @@
-import { IsString, IsNotEmpty, IsBoolean, IsDateString, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsBoolean, IsDateString, IsNumber, IsArray } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class CreateCenterDto {
+
   @IsNotEmpty()
   @IsString()
   readonly name: string;
 
   @IsNotEmpty()
-  @IsString()
-  readonly location: string;
+  @IsNumber()
+  readonly fee: number;
 
   @IsNotEmpty()
   @IsString()
-  readonly contact: string;
+  readonly code: string;
 
   @IsNotEmpty()
   @IsString()
-  readonly email: string;
+  readonly instructor: string;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  readonly isDiscount: boolean;
+
+  @IsNotEmpty()
+  @IsNumber()
+  readonly discountPercent: number;
 
   @IsNotEmpty()
   @IsString()
-  readonly phone: string;
+  readonly description: string;
+
+  @IsNotEmpty()
+  readonly studentId: Types.ObjectId;
+
+  @IsNotEmpty()
+  readonly centerId: Types.ObjectId;
+
+  @IsNotEmpty()
+  @IsArray()
+  readonly studentArray: Types.ObjectId[];
+
+  @IsNotEmpty()
+  readonly schoolId: Types.ObjectId;
 }

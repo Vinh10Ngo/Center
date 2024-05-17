@@ -7,6 +7,10 @@ export class CreateExpenditureDto {
   readonly percentForSchool: number;
 
   @IsNotEmpty()
+  @IsString()
+  readonly image: string
+
+  @IsNotEmpty()
   @IsNumber()
   readonly percentForPrincipal: number;
 

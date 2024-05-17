@@ -10,6 +10,13 @@ export class UpdateExpenditureDto {
   @IsNumber()
   readonly percentForPrincipal?: number;
 
+
+  
+  @IsOptional()
+  @IsString()
+  readonly image?: string;
+
+
   @IsOptional()
   @IsNumber()
   readonly device?: number;

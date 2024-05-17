@@ -7,37 +7,37 @@ export type CourseDocument = HydratedDocument<Course>;
 @Schema()
 export class Course {
 
-  @Prop({ required: true })
+  @Prop({ type: String, default: "" })
   name: string;
 
-  @Prop({ required: true })
+  @Prop({ type: Number, default: "" })
   fee: number;
 
-  @Prop({ required: true })
+  @Prop({ type: String, default: "" })
   code: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, default: "" })
   instructor: string;
 
-  @Prop({ required: true })
+  @Prop({ type: Boolean, default: "" })
   isDiscount: boolean;
 
-  @Prop({ required: true })
+  @Prop({ type: Number, default: "" })
   discountPercent: number;
 
-  @Prop({ required: true })
+  @Prop({ type: String, default: "" })
   description: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'Student', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'Student', default: new Types.ObjectId })
   studentId: Types.ObjectId;
 
-  @Prop({ type: Types.ObjectId, ref: 'Center', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'Center', default: new Types.ObjectId })
   centerId: Types.ObjectId;
 
   @Prop({ type: [Types.ObjectId]})
   studentArray: Types.ObjectId[];
 
-  @Prop({ type: Types.ObjectId, ref: 'School', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'School', default: new Types.ObjectId })
   schoolId: Types.ObjectId;
 }
 

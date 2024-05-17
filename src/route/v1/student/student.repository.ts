@@ -22,7 +22,7 @@ export class StudentRepository {
   }
 
   async findAll(): Promise<StudentDocument[]> {
-    return this.studentModel.find().populate(['parentId' , 'classId' , 'schoolId']).exec();
+    return await this.studentModel.find().populate(['parentId' , 'classId' , 'schoolId']).exec();
   }
 
   async findById(studentId: string): Promise<StudentDocument | null> {

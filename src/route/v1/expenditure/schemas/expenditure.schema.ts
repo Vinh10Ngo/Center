@@ -6,19 +6,22 @@ export type ExpenditureDocument = HydratedDocument<Expenditure>;
 @Schema()
 export class Expenditure {
 
-  @Prop({ required: true })
+  @Prop({ type: Number, default:"" })
   percentForSchool: number;
 
-  @Prop({ required: true })
+  @Prop({ type: String, default:"" })
+  image: string;
+
+  @Prop({ type: Number, default:"" })
   percentForPrincipal: number;
 
-  @Prop({ required: true })
+  @Prop({ type: Number, default:"" })
   device: number;
 
-  @Prop({ required: true })
+  @Prop({ type: Number, default:"" })
   salary: number;
 
-  @Prop({ type: [Number], required: true })
+  @Prop({ type: [Number], default:[] })
   expenditureArray: number[];
 }
 

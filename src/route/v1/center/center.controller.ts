@@ -14,10 +14,16 @@ export class CenterController {
   async create(@Body() createCenterDto: CreateCenterDto): Promise<Center> {
     const center = new Center();
     center.name = createCenterDto.name;
-    center.location = createCenterDto.location;
-    center.contact = createCenterDto.contact;
-    center.email = createCenterDto.email;
-    center.phone = createCenterDto.phone;
+    center.fee = createCenterDto.fee;
+    center.code = createCenterDto.code;
+    center.instructor = createCenterDto.instructor;
+    center.isDiscount = createCenterDto.isDiscount;
+    center.discountPercent = createCenterDto.discountPercent;
+    center.description = createCenterDto.description;
+    center.studentId = createCenterDto.studentId;
+    center.centerId = createCenterDto.centerId;
+    center.studentArray = createCenterDto.studentArray;
+    center.schoolId = createCenterDto.schoolId;
     return this.centerService.create(center);
   }
 

@@ -5,14 +5,14 @@ export type SchoolDocument = HydratedDocument<School>;
 @Schema()
 export class School {
 
-  @Prop({ required: true })
+  @Prop({ type: String, default:"" })
   name: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, default:"" })
   role: string;
 
-  @Prop({ required: true, type: Types.ObjectId, ref: 'Student' }) // Assuming studentId is of type string
+  @Prop({ default: new Types.ObjectId, type: Types.ObjectId, ref: 'Student' }) // Assuming studentId is of type string
   studentId: Types.ObjectId;
 }
 
-export const SchoolSchema = SchemaFactory.createForClass(School);
+export const SchoolSchema = SchemaFactory.createForClass(School); 

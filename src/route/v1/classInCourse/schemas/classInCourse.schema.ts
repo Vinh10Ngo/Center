@@ -6,22 +6,22 @@ export type ClassInCourseDocument = HydratedDocument<ClassInCourse>;
 
 @Schema()
 export class ClassInCourse  {
-  @Prop({ required: true })
+  @Prop({ type: String, default:"" })
   name: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, default:"" })
   code: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, default:"" })
   instructor: string;
 
-  @Prop({ type: [String], required: true })
+  @Prop({ type: [String], default:"" })
   schedule: string[];
 
-  @Prop({ type: Types.ObjectId, ref: 'Course', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'Course', default:"" })
   courseId: Types.ObjectId;
 
-  @Prop({ type: Types.ObjectId, ref: 'Student', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'Student', default:"" })
   studentId: Types.ObjectId;
 }
 export const ClassInCourseSchema = SchemaFactory.createForClass(ClassInCourse);

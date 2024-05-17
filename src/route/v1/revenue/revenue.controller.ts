@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Query } from '@nestjs/common';
 import { RevenueService } from './revenue.service';
 import { Revenue } from './schemas/revenue.schema';
 import { CreateRevenueDto } from './dto/create-revenue.dto';
@@ -22,8 +22,8 @@ export class RevenueController {
   }
 
   @Get()
-  async findAll(): Promise<Revenue[]> {
-    return this.revenueService.findAll();
+  async findAll(@Query() query: any): Promise<Revenue[]> {
+    return this.revenueService.findAll(query);
   }
   @Get(':id') // Define route parameter ':id'
   async findById(@Param('id') id: string): Promise<Revenue> {

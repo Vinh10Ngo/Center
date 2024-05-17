@@ -4,6 +4,8 @@ import { RevenueController } from './revenue.controller';
 import { RevenueService } from './revenue.service';
 import { Revenue, RevenueSchema } from './schemas/revenue.schema';
 import { RevenueRepository } from './revenue.repository';
+import { ParentRepository } from '../parent/parent.repository';
+import { ParamsService } from 'src/helpers/params';
 
 
 
@@ -14,7 +16,7 @@ import { RevenueRepository } from './revenue.repository';
     MongooseModule.forFeature([{ name: Revenue.name, schema: RevenueSchema }]),
   ],
   controllers: [RevenueController],
-  providers: [RevenueService, RevenueRepository],
+  providers: [RevenueService, RevenueRepository, ParamsService],
   exports:[RevenueService, RevenueRepository]
 })  
 export class RevenueModule {}

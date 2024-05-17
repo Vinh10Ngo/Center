@@ -4,12 +4,15 @@ import { Student } from './schemas/student.schema';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto'; // Assuming you have an UpdateStudentDto
 import { Types } from 'mongoose'
-
+import { BaseModulesService } from '../../baseModule/baseModule.service'
 
 
 @Controller('student')
 export class StudentController {
-  constructor(private readonly studentService: StudentService) {}
+  constructor(
+    private readonly studentService: StudentService,
+    private readonly baseService: BaseModulesService
+  ) {}
 
   @Post()
   async create(@Body() createStudentDto : CreateStudentDto): Promise<Student> {
@@ -19,13 +22,14 @@ export class StudentController {
 
   @Post('createExcel')
   async createExcel(): Promise<any> {
-    const data = await this.studentService.importExcel()
-    const response : any[]= [];
-    const obj = {
+    let dataInDb = await this.studentService.findAll()
+    const data = await this.baseService.importExcel()
+    const response: any[] = []
+    const obj: any = {
       name: "",
       age: 0,
       birthday: " ",
-      phone: " ",
+      // phone: " ",
       grade: " ",
       address: " ",
       parentId: new Types.ObjectId,
@@ -35,19 +39,25 @@ export class StudentController {
       info: {}
     }
     const keysToRemove = ['__EMPTY', '__EMPTY_1', '__EMPTY_3'];
-    
     for (let i = 6; i <= 20; i++) {
       const copiedItem = { ...data[i] };
       const info = await this.studentService.removeKeys(copiedItem, keysToRemove);
       obj.name = data[i].__EMPTY
       obj.birthday = data[i].__EMPTY_1
       obj.info = info
-      await this.studentService.create(obj);
-      response[i-6] = obj
-    }
-    return response;
-
+      var foundIndex: number = dataInDb.findIndex((x: any) => x.name === obj.name);
+      if(foundIndex !== -1){
+        
+        await this.studentService.update(dataInDb[foundIndex]._id.toString() ,obj)
+      } else{
+        await this.create(obj)
+      }
+      };  
+      response.push(obj)   
+      
+      return response;
   }
+
 
   @Get()
   async findAll(): Promise<Student[]> {
@@ -56,7 +66,7 @@ export class StudentController {
 
   @Get('excel')
   async exportData(): Promise<any> {
-    return this.studentService.importExcel();
+    return this.baseService.importExcel();
   }
   @Get(':id') // Define route parameter ':id'
   async findById(@Param('id') id: string): Promise<Student> {
@@ -70,5 +80,6 @@ export class StudentController {
   async editById(@Param('id') id: string, @Body() updateStudentDto: UpdateStudentDto): Promise<Student> {
     return this.studentService.update(id, updateStudentDto);
   }
+ 
 }
 

@@ -6,19 +6,19 @@ export type RevenueDocument = HydratedDocument<Revenue>;
 @Schema()
 export class Revenue {
 
-  @Prop({ required: true })
+  @Prop({ type: Number, default:"" })
   revenue: number;
 
-  @Prop({ required: true })
+  @Prop({ type: Number, default:"" })
   actualRevenue: number;
 
-  @Prop({ required: true })
+  @Prop({ type: String, default:"" })
   reason: string;
 
-  @Prop({ type: Types.ObjectId, required: true, ref: 'ClassInCourse' })
+  @Prop({ type: Types.ObjectId, default: new Types.ObjectId, ref: 'ClassInCourse' })
   classId: Types.ObjectId;
 
-  @Prop({ type: Types.ObjectId, required: true, ref: 'Student' })
+  @Prop({ type: Types.ObjectId, default: new Types.ObjectId, ref: 'Student' })
   studentId: Types.ObjectId;
 }
 

@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { ExpenditureRepository } from './expenditure.repository';
 import { Expenditure, ExpenditureDocument } from './schemas/expenditure.schema';
-
+import { ParamsService } from 'src/helpers/params';
 
 @Injectable()
 export class ExpenditureService {
   constructor(private readonly expenditureRepository: ExpenditureRepository) {}
 
-  async findAll(): Promise<ExpenditureDocument[]> {
-    return this.expenditureRepository.findAll();
+  async findAll(params): Promise<ExpenditureDocument[]> {
+    return this.expenditureRepository.findAll(params);
   }
 
   async findById(expenditureId: string): Promise<ExpenditureDocument | null> {
